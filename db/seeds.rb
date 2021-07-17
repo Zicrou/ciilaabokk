@@ -147,7 +147,8 @@ puts "14 Regions created"
 #DEPARTEMENT
 Departement.create(
     name:"CL8K",
-    region_id: Region.first.id
+    region_id: Region.first.id,
+    user_id: User.first.id
 )
 puts "1 Departement created"
 #END ZONE DEPARTEMENT
