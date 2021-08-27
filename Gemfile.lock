@@ -391,8 +391,5 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   zicrou_view_tool!
 
-RUBY VERSION
-   ruby 2.6.3p62
-
 BUNDLED WITH
-   2.1.4
+   2.2.15
