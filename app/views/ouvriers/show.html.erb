@@ -6,6 +6,7 @@
         <%#= image_tag @ouvrier.photo, width:'10%' %>
     <% if !@ouvrier.photo.attachment.nil? %>
       <% if @ouvrier.photo.content_type == "application/pdf" %>
+      <%= link_to @ouvrier.photo.filename, polymorphic_url(@ouvrier.photo), target: "_blank" %>
           <iframe src="<%= rails_blob_path(@ouvrier.photo, disposition: :inline) %>" height="800" width="500"></iframe-->
       <% else %>
         <%= image_tag @ouvrier.photo, width: "50%" if @ouvrier.photo %>
