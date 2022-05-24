@@ -1,0 +1,15 @@
+current directory: /home/zicrou/rails/ciilaabokk/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+/home/zicrou/.rvm/rubies/ruby-2.6.3/bin/ruby -I /home/zicrou/.rvm/rubies/ruby-2.6.3/lib/ruby/site_ruby/2.6.0 -r ./siteconf20211222-4031-1rg1sg1.rb extconf.rb
+creating Makefile
+
+current directory: /home/zicrou/rails/ciilaabokk/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /home/zicrou/rails/ciilaabokk/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/zicrou/rails/ciilaabokk/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20211222-4031-1046vi5/skiptrace/internal

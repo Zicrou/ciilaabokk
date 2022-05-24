@@ -23,8 +23,7 @@
         <%= form.label :Numro_CNI %>
         <%= form.text_field :numerocni, class:"form-control"%>
       </div>
-
-      <div class="col-md-12">
+      
       <div class="form-group">
         <%= form.label :Nom %>
         <%= form.text_field :name, class:"form-control"%>
@@ -80,7 +79,7 @@
         %>
       </div>
 
-      <div class="form-group departements" data-departements="<%= @departements.to_json %>"">
+      <div class="form-group departements" data-departements="<%= @departements.to_json %>">
         <%= form.label :Zone %>
         <%= form.collection_select(:departement_id, Departement.all, :id, :name,
             {
@@ -100,7 +99,7 @@
       <div class="actions">
         <%= form.submit class:"form-control btn-primary" %>
       </div>
-    <% end %>
     </div>
 
+  <% end %>
 </div>

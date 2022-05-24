@@ -12,10 +12,10 @@
           </div>
           <div class="card-body">
             <h2 class="card-title"><%= %></h2>
-            <p><%= image_tag responszone.photo.to_s, width: '100%' %></p>
+            <p><%= image_tag responszone.photo, width: '100%' if responszone.photo.attached? %></p>
             <div class="row">
               <div class="col-md-6">
-              <p><%= image_tag responszone.photocni.to_s, width: '100%' %></p>
+              <p><%= image_tag responszone.photocni, width: '100%' if responszone.photocni.attached? %></p>
               </div>
               <div class="col-md-6">
                 <p class="card-text" style=text-align:right; ><%= responszone.user.name %></p>
@@ -27,7 +27,7 @@
           </div>
           <div class="card-footer text-muted">
             <span style=>CiiLaaBokK</span>
-            <span style=margin:auto; ><%= link_to 'Show'%></span>
+            <span style=margin:auto; ><%= link_to 'Show', responszone %></span>
             <span style=margin:auto;><%= link_to 'Edit', edit_responszone_path(responszone) %></span>
             <span style=margin:auto;><%= link_to 'Destroy', responszone, method: :delete, data: { confirm: 'Are you sure?' } if logged_in?(:site_admin) %></span>
           </div>

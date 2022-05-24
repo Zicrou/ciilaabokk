@@ -1,59 +1,65 @@
-<div class="col-sm-12 blog-main" id="">
+<div class="col-sm-12" id="">
+<span><%= current_user.role if logged_in?(:site_admin, :trusted, :respons_zone)%></span>
 <%= link_to 'New Ouvrier', new_ouvrier_path, class:"btn btn-primary" if logged_in?(:site_admin, :respons_zone, :trusted)%>
 <h1>Rechercher des Ouvriers</h1>
-<h1><%= current_user.role if logged_in?(:site_admin, :trusted, :respons_zone)%></h1>
 <%# @departements.each do |departement| %>
   <%#= departement.name  %>
   <%#= departement.region_id %>
 <%# end %>
 
-<div class="row">
-  <div class="col-sm-9 blog-main">
+<div class="flex-with-sidebar">
+  <div style="width:75%;">
     <%= form_for Ouvrier.new, url: recherche_ouvriers_path, method: :get do |form| %>
-      <div class="form-group">
-        <%= form.label :region_id %>
-        <%= form.collection_select(:region_id, Region.order(:name), :id, :name,
-          {
-            include_blank: true
-          },
-          onchange: 'getIDRegion()',
-          class:"form-control col-md-3"
-        ) %>
+      <div style="display: flex; justify-content: space-around;">
+
+        <div class="form-group">
+          <%= form.label :region_id %>
+          <%= form.collection_select(:region_id, Region.order(:name), :id, :name,
+            {
+              include_blank: true
+            },
+            onchange: 'getIDRegion()',
+            class:"form-control"
+          ) %>
+        </div>
+
+
+        <div class="form-group departements" data-departements="<%= @departements.to_json %>">
+          <%= form.label :Zone %>
+          <%= form.collection_select(:departement_id, Departement.all, :id, :name,
+            {
+              include_blank: true
+            },
+            class: "form-control"
+          ) %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :domaine_id %>
+          <%= form.collection_select(:domaine_id, Domaine.order(:name), :id, :name,
+            {
+              include_blank: true
+            },
+            onchange: 'getIDDomaine()',
+            class: "form-control"
+          ) %>
+        </div>
+        
+        <div class="form-group metiers" data-metiers="<%= @metiers.to_json %>">
+          <%= form.label :metier_id %>
+          <%= form.collection_select(:metier_id, Metier.order(:name), :id, :name,
+            {
+              include_blank: true
+            },
+            class: "form-control"
+          ) %>
+        </div>
       </div>
 
-
-      <div class="form-group departements" data-departements="<%= @departements.to_json %>">
-        <%= form.label :Zone %>
-        <%= form.collection_select(:departement_id, Departement.all, :id, :name,
-          {
-            include_blank: true
-          },
-          class: "form-control col-md-3"
-        ) %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :domaine_id %>
-        <%= form.collection_select(:domaine_id, Domaine.order(:name), :id, :name,
-          {
-            include_blank: true
-          },
-          onchange: 'getIDDomaine()',
-          class: "form-control col-md-3"
-        ) %>
+      <div style="display: flex; justify-content: center;">
+        <%= form.submit "Rechercher",  class:"form-control btn btn-primary col-md-4" %>
       </div>
       
-      <div class="form-group metiers" data-metiers="<%= @metiers.to_json %>">
-        <%= form.label :metier_id %>
-        <%= form.collection_select(:metier_id, Metier.order(:name), :id, :name,
-          {
-            include_blank: true
-          },
-          class: "form-control col-md-3"
-        ) %>
-      </div>
-      
-      <%= form.submit "Rechercher",  class:"form-control col-md-2 btn-primary" %>
       <%# if defined?(@query) && @query.present?  %>
         <%#= link_to 'Réinitialiser', ouvriers_path %>
       <%# end %>
@@ -61,20 +67,21 @@
   </div>
     <!--RENDER SIDEBAR -->  
     <!-- RENDER SIDEBAR IF LOG IN AS SITE_ADMIN -->  
-      
-      <% if logged_in?(:site_admin, :trusted) %>  
-        <div class="col-sm-3">
-          <%= render 'shared/g_l_sidebar'%> 
-        </div>
-      <% end %>
+  
+  <% if logged_in?(:site_admin, :trusted) %>  
+    <div class="">
+      <%= render 'shared/g_l_sidebar'%> 
+    </div>
+  <% end %>
       <!-- END RENDERRING SIDEBAR -->
 </div>
 
 
-<h1 style=color:red;><u><%= @liste_des_ouvrier %></u></h1>  
+      <br>
+      <br>
+<h1 style=color:red;><u><%= @liste_des_ouvriers %></u></h1>  
 
 <!--div class="row"-->
-      
   <!-- SHOWING THE OUVRIERS -->
   <div class="col-sm-9 offset-sm-1">
     <% if @ouvriers.nil? or @ouvriers.empty? %>

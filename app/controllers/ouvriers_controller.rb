@@ -110,10 +110,11 @@ layout 'general-layout'
     @departements = Departement.all
     @metiers = Metier.all
     if logged_in?(:respons_zone)
-      @regions = Region.by_respons_zone(current_user.region_id)
+      @regions = Region.by_respons_zone(current_user.responszone.region_id)
     else
       @regions = Region.all
     end
+    
   end
 
   # GET /ouvriers/1/edit
@@ -127,7 +128,12 @@ layout 'general-layout'
   def create
     @ouvrier = Ouvrier.new(ouvrier_params)
     @ouvrier.user_id = current_user.id
-
+    if logged_in?(:respons_zone)
+      @regions = Region.by_respons_zone(current_user.region_id)
+    else
+      @regions = Region.all
+    end
+    
     if @ouvrier.save
       redirect_to @ouvrier, notice: 'Ouvrier was successfully created.'
     else

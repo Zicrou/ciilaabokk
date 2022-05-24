@@ -3,12 +3,12 @@
 
   <p>
     <strong>Photocni:</strong>
-    <%= image_tag @responszone.photocni.to_s, width: '30%' %>
+    <%= image_tag @responszone.photocni, width: '30%' if @responszone.photocni.attached? %>
   </p>
 
   <p>
     <strong>Photo : </strong>
-    <%= image_tag @responszone.photo.to_s, width: '30%' %>
+    <%= image_tag @responszone.photo, width: '30%' if @responszone.photo.attached? %>
   </p>
 
   <p>
