@@ -17,9 +17,9 @@ class User < ApplicationRecord
    validates_presence_of :name
    
    #belongs_to :privilege
-   has_many :comments, dependent: :destroy
-   has_many :blogs, dependent: :destroy
-   has_many :authors, dependent: :destroy
+  # has_many :comments, dependent: :destroy
+  # has_many :blogs, dependent: :destroy
+  # has_many :authors, dependent: :destroy
    has_many :responszones, dependent: :destroy
    has_many :ouvriers
    has_many :metiers
