@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Ouvrier, type: :model do
   #pending "add some examples to (or delete) #{__FILE__},
+  let(:domaine) {
+    Domaine.new(name: "Domaine 1")
+  }
+  let(:metier) {
+    Metier.new(name: "Metier 1", domaine_id: 1)
+  }
+  let(:region) {
+    Region.new(name: "Domaine 1")
+  }
+  let(:departement) {
+    Departement.new(name: "Domaine 1", region_id: 1)
+  }
   subject {
     described_class.new(
       name: "ANYTHING",
@@ -13,7 +25,7 @@ RSpec.describe Ouvrier, type: :model do
       region_id: 1,
       departement_id: 1,
       numerocni: "ANYTHING",
-      user_id: 1,
+      #user_id: 1,
       #photocni: "ANYTHING",
       #photo: "ANYTHING",
       #telephone2: 1,
@@ -99,9 +111,17 @@ RSpec.describe Ouvrier, type: :model do
   #  expect(subject).to_not be_valid
   #end
 
-  it "is not valid without a user_id" do
-    subject.user_id = nil
-    expect(subject).to_not be_valid
+  #it "is not valid without a user_id" do
+  #  subject.user_id = nil
+  #  expect(subject).to_not be_valid
+  #end
+
+  describe "Associations" do
+    it { should belong_to(:user) }
+    it { should belong_to(:metier) }
+    it { should belong_to(:domaine) }
+    it { should belong_to(:region) }
+    it { should belong_to(:departement) }
   end
 
 end
