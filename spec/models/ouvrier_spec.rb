@@ -2,17 +2,23 @@ require 'rails_helper'
 
 RSpec.describe Ouvrier, type: :model do
   #pending "add some examples to (or delete) #{__FILE__},
+  let(:user) {
+    User.create!(name: "User 1", email: "user@email.com", password: "pwd1234",roles: "Admin")
+  }
   let(:domaine) {
-    Domaine.new(name: "Domaine 1")
+    Domaine.create!(name: "Domaine 1")
   }
   let(:metier) {
-    Metier.new(name: "Metier 1", domaine_id: 1)
+    Metier.create!(name: "Metier 1", domaine_id: domaine.id, user_id: user.id)
+  }
+  let(:country) {
+    Country.create!(name: "Country 1")
   }
   let(:region) {
-    Region.new(name: "Domaine 1")
+    Region.create!(name: "Region 1", country_id: country.id)
   }
   let(:departement) {
-    Departement.new(name: "Domaine 1", region_id: 1)
+    Departement.create!(name: "Domaine 1", region_id: region.id, user_id: user.id)
   }
   subject {
     described_class.new(
@@ -25,7 +31,7 @@ RSpec.describe Ouvrier, type: :model do
       region_id: 1,
       departement_id: 1,
       numerocni: "ANYTHING",
-      #user_id: 1,
+      user_id: 1,
       #photocni: "ANYTHING",
       #photo: "ANYTHING",
       #telephone2: 1,
@@ -37,6 +43,11 @@ RSpec.describe Ouvrier, type: :model do
   
   
   it "is valid with valid attributes" do
+    subject.domaine = domaine
+    subject.metier = metier
+    subject.region = region
+    subject.departement = departement
+    subject.user = user
     expect(subject).to be_valid
   end
 
